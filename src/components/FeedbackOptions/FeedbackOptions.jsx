@@ -5,40 +5,23 @@ import {
 } from './feedbackOptions.styled';
 import PropTypes from 'prop-types';
 
-export default function FeedbackOptions({ onLeaveFeedback }) {
+export default function FeedbackOptions({ onLeaveFeedback, options }) {
+  const keys = Object.keys(options);
   return (
     <>
       <FeedbacOptionsUl>
-        <FeedbacOptionsLi key="good">
-          <FeedbacOptionsButton
-            type="button"
-            onClick={() => {
-              onLeaveFeedback('good');
-            }}
-          >
-            Good
-          </FeedbacOptionsButton>
-        </FeedbacOptionsLi>
-        <FeedbacOptionsLi key="neutral">
-          <FeedbacOptionsButton
-            type="button"
-            onClick={() => {
-              onLeaveFeedback('neutral');
-            }}
-          >
-            Neutral
-          </FeedbacOptionsButton>
-        </FeedbacOptionsLi>
-        <FeedbacOptionsLi key="bad">
-          <FeedbacOptionsButton
-            type="button"
-            onClick={() => {
-              onLeaveFeedback('bad');
-            }}
-          >
-            Bad
-          </FeedbacOptionsButton>
-        </FeedbacOptionsLi>
+        {keys.map(el => (
+          <FeedbacOptionsLi key={el}>
+            <FeedbacOptionsButton
+              type="button"
+              onClick={() => {
+                onLeaveFeedback(el);
+              }}
+            >
+              {el}
+            </FeedbacOptionsButton>
+          </FeedbacOptionsLi>
+        ))}
       </FeedbacOptionsUl>
     </>
   );
@@ -46,4 +29,9 @@ export default function FeedbackOptions({ onLeaveFeedback }) {
 
 FeedbackOptions.propTypes = {
   onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  }).isRequired,
 };

@@ -35,7 +35,10 @@ export class App extends Component {
     return (
       <>
         <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.handleButton} />
+          <FeedbackOptions
+            onLeaveFeedback={this.handleButton}
+            options={this.state}
+          />
         </Section>
 
         <Section title="Statistics">
